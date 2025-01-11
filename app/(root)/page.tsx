@@ -6,9 +6,9 @@ import { sampleBooks } from "@/constants";
 const Home = () => {
   return (
     <>
-      <BookOverview {...sampleBooks[0]} />
+      <BookOverview {...(sampleBooks[0] as Book)} />
       <BookList
-        title={"Latest booklist"}
+        title={"Latest books"}
         books={sampleBooks}
         containerClassName={"mt-28"}
       />
