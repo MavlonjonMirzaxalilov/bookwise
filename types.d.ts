@@ -11,6 +11,6 @@ type Book = {
   coverUrl: string;
   videoUrl?: string; // Majburiy bo'lmagan
   summary?: string; // Majburiy bo'lmagan
-  color: string; // Kitob uchun rang
+  color?: string; // Kitob uchun rang
   isLoanedBook?: boolean; // Majburiy bo'lmagan
 };
