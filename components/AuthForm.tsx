@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { FIELD_NAMES } from "@/constants";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -60,22 +61,28 @@ const AuthForm = <T extends FieldValues>({
           onSubmit={form.handleSubmit(handleSubmit)}
           className="w-full space-y-6"
         >
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {Object.keys(defaultValues).map((field) => (
+            <FormField
+              key={field}
+              control={form.control}
+              name={field as Path<T>}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={"capitalize"}>
+                    {FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="shadcn" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
+
           <Button type="submit">Submit</Button>
         </form>
       </Form>
